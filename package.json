@@ -1,0 +1,19 @@
+{
+  "name": "fw-dev-dashboard",
+  "version": "1.0.0",
+  "description": "Configurable development dashboard module for webpack systems (later gulp and grunt)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinnyhuang/fw-dev-dashboard.git"
+  },
+  "author": "Vincent Huang <vincent.vwh.huang@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vinnyhuang/fw-dev-dashboard/issues"
+  },
+  "homepage": "https://github.com/vinnyhuang/fw-dev-dashboard#readme"
+}
