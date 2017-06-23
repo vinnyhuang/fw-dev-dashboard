@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Configurable development dashboard module for webpack systems (later gulp and grunt)",
   "main": "index.js",
+  "bin": {
+    "fw-dev-dashboard": "./bin/webpack-dashboard.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +18,20 @@
   "bugs": {
     "url": "https://github.com/vinnyhuang/fw-dev-dashboard/issues"
   },
-  "homepage": "https://github.com/vinnyhuang/fw-dev-dashboard#readme"
+  "homepage": "https://github.com/vinnyhuang/fw-dev-dashboard#readme",
+  "peerDependencies": {
+    "webpack": "*"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "commander": "^2.9.0",
+    "cross-spawn": "^4.0.0",
+    "express": "^4.15.3",
+    "filesize": "^3.3.0",
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.6.1",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
+  }
 }
