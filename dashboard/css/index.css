@@ -1,0 +1,31 @@
+
+.logBox {
+  overflow: hidden;
+  border-style: groove;
+  position: relative;
+}
+
+.logContainer {
+  overflow: auto;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  right: 0;
+  top: 0;
+}
+
+.statusBox {
+  overflow: auto;
+  border-style: groove;
+}
+
+.progressDiv {
+  padding: 5px;
+}
+
+p {
+  line-height: 14px;
+  font-size: 14px;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  margin: 0 !important;
+}

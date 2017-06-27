@@ -3,9 +3,12 @@
 
 var commander = require("commander");
 var spawn = require("cross-spawn");
-var Dashboard = require("../dashboard/index.js");
+// var Dashboard = require("../dashboard/terminal.js");
 var SocketIOClient = require("socket.io-client");
 var Server = require("../server/index.js");
+var express = require("express");
+// var morgan = require("morgan");
+var path = require("path");
 
 var program = new commander.Command("fw-dev-dashboard");
 
@@ -35,37 +38,55 @@ var child = spawn(command, args, {
   detached: true
 });
 
+var port = program.port || 9838;
 Server({ port: program.port });
 
-var dashboard = new Dashboard({
-  color: program.color || "green",
-  minimal: program.minimal || false,
-  title: program.title || null
-});
+// var dashboard = new Dashboard({
+//   color: program.color || "green",
+//   minimal: program.minimal || false,
+//   title: program.title || null
+// });
 
+// var host = "127.0.0.1";
+// var socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
 
-var port = program.port || 9838;
+// socket.on("event", function(event) {
+//   dashboard.setData(event);
+// });
+
+// child.stdout.on("data", function (data) {
+//   dashboard.setData([{
+//     type: "log",
+//     value: data.toString("utf8")
+//   }]);
+// });
+
+// child.stderr.on("data", function (data) {
+//   dashboard.setData([{
+//     type: "log",
+//     value: data.toString("utf8")
+//   }]);
+// });
 
 var host = "127.0.0.1";
-var socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
-
-socket.on("event", function(event) {
-  dashboard.setData(event);
-});
+var socket = SocketIOClient("http://" + host + ":" + port + "/plugin");
 
 child.stdout.on("data", function (data) {
-  dashboard.setData([{
+  socket.emit("event", [{
     type: "log",
     value: data.toString("utf8")
   }]);
 });
 
 child.stderr.on("data", function (data) {
-  dashboard.setData([{
+  socket.emit("event", [{
     type: "log",
     value: data.toString("utf8")
   }]);
 });
+
+var app = express();
+app.use(express.static(path.resolve(__dirname, '..', 'dashboard')));
 
 process.on("exit", function () {
   process.kill(process.platform === "win32" ? child.pid : -child.pid);

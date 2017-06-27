@@ -89,7 +89,7 @@ DashboardPlugin.prototype.apply = function(compiler) {
       value: "Success"
     }, {
       type: "progress",
-      value: 0
+      value: 1
     }, {
       type: "operations",
       value: "idle" + getTimeMessage(timer)
@@ -127,14 +127,30 @@ DashboardPlugin.prototype.apply = function(compiler) {
       var others = [];
 
       messages.forEach(function(m) {
+        // console.log("lint message: ", m);
         var messageNoColor = removeTerminalColor(m).trim();
+        var lineNumbers = messageNoColor.match(/\n[>\s\d]*\|/g);
+        if (lineNumbers === null) { lineNumbers = []; }
+        // console.log("lineNumbers", lineNumbers);
+        var maxIndentLength = lineNumbers.reduce(function(max, line) {
+          return line.length > max ? line.length : max;
+        }, 0);
+        var indented = messageNoColor.replace(/\n[>\s\d]*\|/g, function(match) {
+          return '\n' + Array(maxIndentLength - match.length + 1).fill(' ').join('')+ match.slice(1);
+        });
 
         if (messageNoColor.startsWith('warning:')) {
-          warnings.push(m);
+          // warnings.push(m);
+          // warnings.push(messageNoColor);
+          warnings.push(indented);
         } else if (messageNoColor.startsWith('error:')) {
-          errors.push(m);
+          // errors.push(m);
+          // errors.push(messageNoColor);
+          errors.push(indented);
         } else {
-          others.push(m);
+          // others.push(m);
+          // others.push(messageNoColor);
+          others.push(indented);
         }
       });
 
@@ -174,7 +190,7 @@ DashboardPlugin.prototype.apply = function(compiler) {
       ) {
         handler.call(null, [{
           type: "test",
-          value: value
+          value: removeTerminalColor(value)
         }]);
       }
     };
@@ -185,7 +201,7 @@ DashboardPlugin.prototype.apply = function(compiler) {
       if (!value.startsWith('Warning: ')) {
         handler.call(null, [{
           type: "test",
-          value: value
+          value: removeTerminalColor(value)
         }]);
       }
     };

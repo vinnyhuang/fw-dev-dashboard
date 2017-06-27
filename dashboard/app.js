@@ -1,58 +1,87 @@
 import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { Well, Panel, ProgressBar } from 'react-bootstrap';
-
-const divStyle = { margin: '0 20px' }
+import SocketIOClient from 'socket.io-client';
 
 export default class App extends Component {
-  // componentWillMount: function() {
-  //   port = 9839  // This should be changed somehow to reflect input
-  //   var host = "127.0.0.1";
-  //   var socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
+  constructor() {
+    super();
+    this.state = {
+      progress: 0,
+      operations: "",
+      buildLog: "",
+      lintLog: "",
+      testLog: "",
+      buildStatus: "",
+      lintStatus: "",
+      testStatus: ""
+    }
+  }
 
-  //   socket.on("event", function(event) {
-  //     dashboard.setData(event);
-  //   });
-  // },
+  componentWillMount() {
+    var port = 9839;  // This should be changed somehow to reflect input
+    var host = "127.0.0.1";
+    var socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
+    var that = this;
+
+    socket.on("event", function(message) {
+      console.log(message);
+      that.setState({
+        progress: message.progress,
+        operations: message.operations,
+        buildLog: message.buildLog,
+        lintLog: message.lintLog,
+        testLog: message.testLog,
+        buildStatus: message.buildStatus,
+        lintStatus: message.lintStatus,
+        testStatus: message.testStatus
+      });
+    });
+  }
 
   render() {
+    // const buildLogParagraphs = this.state.buildLog.split('\n').map((line) => (<p>{ line }</p>));
+    // console.log(buildLogParagraphs);
     return (
       <div>
-        <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
-          <div key="log" style={ divStyle } data-grid={{ x: 0, y: 0, w: 8, h: 5 }}>
-            <Well bsSize="lg">log</Well>
+        <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200} verticalCompact={ false }>
+          <div key="log" className="logBox" data-grid={{ x: 0, y: 0, w: 8, h: 5 }}>
+            <div className="logContainer">
+              { this.state.buildLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>)) }
+            </div>
           </div>
-          <div key="lint" data-grid={{ x: 0, y: 5, w: 5, h: 5 }}>
-            <Well bsSize="lg">lint</Well>
+          <div key="lint" className="logBox" data-grid={{ x: 0, y: 5, w: 5, h: 5 }}>
+            <div className="logContainer">
+              { this.state.lintLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>)) }
+            </div>
           </div>
-          <div key="test" data-grid={{ x: 5, y: 5, w: 5, h: 5 }}>
-            <Well bsSize="lg">test</Well>
+          <div key="test" className="logBox" data-grid={{ x: 5, y: 5, w: 5, h: 5 }}>
+            <div className="logContainer">
+              {
+                this.state.testLog.replace(/\n[\s]*(\d)/g, function(match, p1) { return  '\n  ' + p1 })
+                                  .replace(/\n[\s]*at/g, '\n    at')
+                                  .replace(/ /g, "\u00a0")
+                                  .split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>))
+              }
+            </div>
           </div>
-          <div key="operation" data-grid={{ x: 8, y: 0, w: 2, h: 1 }}>
-            <Panel header="operation">
-              operation
-            </Panel>
+          <div key="operation" className="statusBox" data-grid={{ x: 8, y: 0, w: 2, h: 1 }}>
+            { this.state.operations }
           </div>
-          <div key="progress" data-grid={{ x: 8, y: 1, w: 2, h: 1 }}>
-            <Panel header="progress">
-              <ProgressBar active now={50}/>
-              <div>50%%%</div>
-            </Panel>
+          <div key="progress" className="statusBox" data-grid={{ x: 8, y: 1, w: 2, h: 1 }}>
+            <div className="progressDiv">
+              <ProgressBar active now={ this.state.progress }/>
+            </div>
+            { this.state.progress }
           </div>
-          <div key="build-status" data-grid={{ x: 8, y: 2, w: 2, h: 1 }}>
-            <Panel header="build-status">
-              build-status
-            </Panel>
+          <div key="build-status" className="statusBox" data-grid={{ x: 8, y: 2, w: 2, h: 1 }}>
+            { this.state.buildStatus} 
           </div>
-          <div key="lint-status" data-grid={{ x: 8, y: 3, w: 2, h: 1 }}>
-            <Panel header="lint-status">
-              lint-status
-            </Panel>
+          <div key="lint-status" className="statusBox" data-grid={{ x: 8, y: 3, w: 2, h: 1 }}>
+            { this.state.lintStatus }
           </div>
-          <div key="test-status" data-grid={{ x: 8, y: 4, w: 2, h: 1 }}>
-            <Panel header="test-status">
-              test-status
-            </Panel>
+          <div key="test-status" className="statusBox" data-grid={{ x: 8, y: 4, w: 2, h: 1 }}>
+            { this.state.testStatus }
           </div>
         </ReactGridLayout>
       </div>
