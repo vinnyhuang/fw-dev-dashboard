@@ -4,6 +4,7 @@ import { Well, Panel, ProgressBar } from 'react-bootstrap';
 import SocketIOClient from 'socket.io-client';
 // import Convert from 'ansi-to-html';
 import ansiHTML from 'ansi-html';
+import dragIcon from './images/cursor-move-black.png';
 
 // var convert = new Convert();
 
@@ -48,15 +49,21 @@ export default class App extends Component {
     // console.log(buildLogParagraphs);
     return (
       <div>
-        <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200} verticalCompact={ false }>
-          <div key="log" className="logBox" data-grid={{ x: 0, y: 0, w: 8, h: 5 }}>
+        <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200} verticalCompact={ false } draggableCancel=".logContainer" draggableHandle=".handle" >
+          <div key="log" className="logBox" data-grid={{ x: 0, y: 0, w: 8, h: 5}}>
             <div className="logContainer">
               { this.state.buildLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>)) }
+            </div>
+            <div className="handle">
+              <div className="handleIcon"/>
             </div>
           </div>
           <div key="lint" className="logBox" data-grid={{ x: 0, y: 5, w: 5, h: 5 }}>
             <div className="logContainer">
               { this.state.lintLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (line === "" ? <p key={ index }><br /></p> : <p key={ index } dangerouslySetInnerHTML={{__html: ansiHTML(line)}} />)) }
+            </div>
+            <div className="handle">
+              <div className="handleIcon"/>
             </div>
           </div>
           <div key="test" className="logBox" data-grid={{ x: 5, y: 5, w: 5, h: 5 }}>
@@ -67,6 +74,9 @@ export default class App extends Component {
                                   .replace(/ /g, "\u00a0")
                                   .split('\n').map((line, index) => (<p key={ index } dangerouslySetInnerHTML={{__html: line === "" ? '<br />' : ansiHTML(line)}}></p>))
               }
+            </div>
+            <div className="handle">
+              <div className="handleIcon"/>
             </div>
           </div>
           <div key="operation" className="statusBox" data-grid={{ x: 8, y: 0, w: 2, h: 1 }}>

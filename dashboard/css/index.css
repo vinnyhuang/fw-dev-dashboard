@@ -33,3 +33,43 @@ p {
   overflow-wrap: break-word;*/
 
 }
+
+.handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+}
+
+.handleIcon {
+  background-image: url(../images/cursor-move-black.png);
+  /*background: url('../images/cursor-move-black.png') cover no-repeat;*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+  border: none;
+}
+
+/*.handleIcon {
+  height: 18px;
+  width: 18px;
+  filter: none; 
+  -webkit-filter: blur(0px); 
+  -moz-filter: blur(0px); 
+  -ms-filter: blur(0px);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+}*/
+
+/*.handleIcon {
+  -webkit-transform: scale(0.10);
+  -moz-transform: scale(0.10);
+  -ms-transform: scale(0.10);
+  -o-transform: scale(0.10);
+  transform: scale(0.10);
+  filter: none; 
+  -webkit-filter: blur(0px); 
+  -moz-filter: blur(0px); 
+  -ms-filter: blur(0px);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+}*/
