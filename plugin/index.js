@@ -129,13 +129,14 @@ DashboardPlugin.prototype.apply = function(compiler) {
       messages.forEach(function(m) {
         // console.log("lint message: ", m);
         var messageNoColor = removeTerminalColor(m).trim();
-        var lineNumbers = messageNoColor.match(/\n[>\s\d]*\|/g);
+        // var lineNumbers = messageNoColor.match(/\n[>\s\d]*\|/g);
+        var lineNumbers = m.match(/\n[>\s\d]*\|/g);
         if (lineNumbers === null) { lineNumbers = []; }
         // console.log("lineNumbers", lineNumbers);
         var maxIndentLength = lineNumbers.reduce(function(max, line) {
           return line.length > max ? line.length : max;
         }, 0);
-        var indented = messageNoColor.replace(/\n[>\s\d]*\|/g, function(match) {
+        var indented = m.replace(/\n[>\s\d]*\|/g, function(match) {
           return '\n' + Array(maxIndentLength - match.length + 1).fill(' ').join('')+ match.slice(1);
         });
 
@@ -190,7 +191,7 @@ DashboardPlugin.prototype.apply = function(compiler) {
       ) {
         handler.call(null, [{
           type: "test",
-          value: removeTerminalColor(value)
+          value: value // removeTerminalColor(value)
         }]);
       }
     };
@@ -201,7 +202,7 @@ DashboardPlugin.prototype.apply = function(compiler) {
       if (!value.startsWith('Warning: ')) {
         handler.call(null, [{
           type: "test",
-          value: removeTerminalColor(value)
+          value: value // removeTerminalColor(value)
         }]);
       }
     };

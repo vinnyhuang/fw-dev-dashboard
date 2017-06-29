@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { Well, Panel, ProgressBar } from 'react-bootstrap';
 import SocketIOClient from 'socket.io-client';
+// import Convert from 'ansi-to-html';
+import ansiHTML from 'ansi-html';
+
+// var convert = new Convert();
 
 export default class App extends Component {
   constructor() {
@@ -52,7 +56,7 @@ export default class App extends Component {
           </div>
           <div key="lint" className="logBox" data-grid={{ x: 0, y: 5, w: 5, h: 5 }}>
             <div className="logContainer">
-              { this.state.lintLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>)) }
+              { this.state.lintLog.replace(/ /g, "\u00a0").split('\n').map((line, index) => (line === "" ? <p key={ index }><br /></p> : <p key={ index } dangerouslySetInnerHTML={{__html: ansiHTML(line)}} />)) }
             </div>
           </div>
           <div key="test" className="logBox" data-grid={{ x: 5, y: 5, w: 5, h: 5 }}>
@@ -61,7 +65,7 @@ export default class App extends Component {
                 this.state.testLog.replace(/\n[\s]*(\d)/g, function(match, p1) { return  '\n  ' + p1 })
                                   .replace(/\n[\s]*at/g, '\n    at')
                                   .replace(/ /g, "\u00a0")
-                                  .split('\n').map((line, index) => (<p key={ index }>{ line === "" ? <br /> : line }</p>))
+                                  .split('\n').map((line, index) => (<p key={ index } dangerouslySetInnerHTML={{__html: line === "" ? '<br />' : ansiHTML(line)}}></p>))
               }
             </div>
           </div>

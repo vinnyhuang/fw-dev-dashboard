@@ -28,4 +28,8 @@ p {
   font-size: 14px;
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   margin: 0 !important;
+  white-space: nowrap;
+  /*word-break: break-all;
+  overflow-wrap: break-word;*/
+
 }
