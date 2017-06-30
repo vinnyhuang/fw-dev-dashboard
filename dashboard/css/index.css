@@ -42,7 +42,7 @@ body {
 }
 
 .react-resizable-handle {
-  display: none;
+  /*display: none;*/
 }
 
 .title {
@@ -93,20 +93,6 @@ body {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
-
-/*.progress {
-  margin: 4px 3px 0px 3px;
-}
-
-.progressLabel {
-  position: absolute;
-  top: 4px;
-  left: 7px;
-}
-
-.statusContainer {
-  margin-left: 4px;
-}*/
 
 p {
   line-height: 14px;
