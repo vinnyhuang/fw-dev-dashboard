@@ -81,7 +81,7 @@ body {
 
 .progressPercent {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   font-size: 32px;
@@ -89,7 +89,7 @@ body {
 
 .barContainer {
   position: relative;
-  top: 80%;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
