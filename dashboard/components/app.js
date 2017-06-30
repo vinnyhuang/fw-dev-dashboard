@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { Well, Panel, ProgressBar } from 'react-bootstrap';
 import SocketIOClient from 'socket.io-client';
-// import Convert from 'ansi-to-html';
 import ansiHTML from 'ansi-html';
 import dragIcon from '../images/cursor-move-black.png';
 import Log from './log.js';
 import Status from './status.js';
 import Progress from './progress.js';
 import { logElements, statusElements, progressElements } from '../../config/dashboard.config.js';
-
-// var convert = new Convert();
 
 export default class App extends Component {
   constructor() {
@@ -28,23 +25,30 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    var port = 9839;  // This should be changed somehow to reflect input
-    var host = "127.0.0.1";
-    var socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
-    var that = this;
+    const port = 9839;  // This should be changed somehow to reflect input
+    const host = "127.0.0.1";
+    const socket = SocketIOClient("http://" + host + ":" + port + "/dashboard");
+    const that = this;
 
     socket.on("event", function(message) {
       // console.log(message);
-      that.setState({
-        progress: message.progress,
-        operations: message.operations,
-        buildLog: message.buildLog,
-        lintLog: message.lintLog,
-        testLog: message.testLog,
-        buildStatus: message.buildStatus,
-        lintStatus: message.lintStatus,
-        testStatus: message.testStatus
+
+      const newState = {};
+      Object.keys(message).forEach((key) => {
+        newState[key] = message[key];
       });
+      that.setState(newState);
+
+      // that.setState({
+      //   progress: message.progress,
+      //   operations: message.operations,
+      //   buildLog: message.buildLog,
+      //   lintLog: message.lintLog,
+      //   testLog: message.testLog,
+      //   buildStatus: message.buildStatus,
+      //   lintStatus: message.lintStatus,
+      //   testStatus: message.testStatus
+      // });
     });
   }
 
