@@ -33,22 +33,22 @@ export default class App extends Component {
     socket.on("event", function(message) {
       // console.log(message);
 
-      const newState = {};
-      Object.keys(message).forEach((key) => {
-        newState[key] = message[key];
-      });
-      that.setState(newState);
-
-      // that.setState({
-      //   progress: message.progress,
-      //   operations: message.operations,
-      //   buildLog: message.buildLog,
-      //   lintLog: message.lintLog,
-      //   testLog: message.testLog,
-      //   buildStatus: message.buildStatus,
-      //   lintStatus: message.lintStatus,
-      //   testStatus: message.testStatus
+      // const newState = {};
+      // Object.keys(message).forEach((key) => {
+      //   if (message[key] !== that.state[key]) { newState[key] = message[key]; }
       // });
+      // that.setState(newState);
+
+      that.setState({
+        progress: message.progress,
+        operations: message.operations,
+        buildLog: message.buildLog,
+        lintLog: message.lintLog,
+        testLog: message.testLog,
+        buildStatus: message.buildStatus,
+        lintStatus: message.lintStatus,
+        testStatus: message.testStatus
+      });
     });
   }
 

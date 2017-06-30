@@ -4,7 +4,7 @@ import { ProgressBar } from 'react-bootstrap';
 export default class Progress extends Component {
   render() {
     return (
-      <div>
+      <div className="progress">
         <div className="progressContainer">
           <ProgressBar active now={ this.props.data } />
         </div>

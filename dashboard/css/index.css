@@ -1,9 +1,32 @@
+:root {
+  --nord0: #2E3440;
+  --nord1: #3B4252;
+  --nord2: #434C5E;
+  --nord3: #4C566A;
+  --nord4: #D8DEE9;
+  --nord5: #E5E9F0;
+  --nord6: #ECEFF4;
+  --nord7: #8FBCBB;
+  --nord8: #88C0D0;
+  --nord9: #81A1C1;
+  --nord10: #5E81AC;
+  --nord11: #BF616A;
+  --nord12: #D08770;
+  --nord13: #EBCB8B;
+  --nord14: #A3BE8C;
+  --nord15: #B48EAD;
+}
+
+body {
+  background-color: var(--nord4);
+}
 
 .box {
   overflow: hidden;
   /*border-style: groove;*/
   /*border-style: none;*/
-  border: 2px none lightgray;
+  border: 2px none var(--nord1);
+  border-radius: 10px;
   position: relative;
 }
 
@@ -20,6 +43,11 @@
   display: none;
 }
 
+.box {
+  background: var(--nord9);
+  color: var(--nord0);
+}
+
 .logContainer {
   overflow: auto;
   position: absolute;
@@ -32,12 +60,13 @@
   width: 100%;
   right: 0;
   top: 20px;
-  background: rgba(180, 180, 180, .15);
+  /*background: rgba(180, 180, 180, .15);*/
+  background: var(--nord3);
 }
 
 .title {
   height: 18px;
-  margin-left: 3px;
+  margin-left: 5px;
   margin-top: 1px;
 }
 
@@ -45,10 +74,18 @@
   overflow: visible;
 }
 
+.progress {
+  margin: 4px 3px 0px 3px;
+}
+
 .progressLabel {
   position: absolute;
-  top: 0px;
-  left: 4px;
+  top: 4px;
+  left: 7px;
+}
+
+.statusContainer {
+  margin-left: 4px;
 }
 
 p {
@@ -77,4 +114,8 @@ p {
   height: 18px;
   width: 18px;
   border: none;
+}
+
+.handle:hover {
+  cursor: move;
 }
