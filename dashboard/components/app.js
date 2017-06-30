@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
-import { Well, Panel, ProgressBar } from 'react-bootstrap';
 import SocketIOClient from 'socket.io-client';
 import ansiHTML from 'ansi-html';
 import dragIcon from '../images/cursor-move-black.png';

@@ -1,4 +1,4 @@
-:root {
+/*:root {
   --nord0: #2E3440;
   --nord1: #3B4252;
   --nord2: #434C5E;
@@ -15,19 +15,21 @@
   --nord13: #EBCB8B;
   --nord14: #A3BE8C;
   --nord15: #B48EAD;
-}
+}*/
 
 body {
-  background-color: var(--nord4);
+  background-color: lightgray;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
 }
 
 .box {
   overflow: hidden;
   /*border-style: groove;*/
   /*border-style: none;*/
-  border: 2px none var(--nord1);
-  border-radius: 10px;
+  border: 2px none black;
+  border-radius: 3px;
   position: relative;
+  background: teal;
 }
 
 .box:hover {
@@ -43,12 +45,13 @@ body {
   display: none;
 }
 
-.box {
-  background: var(--nord9);
-  color: var(--nord0);
+.title {
+  height: 18px;
+  margin-left: 5px;
+  margin-top: 1px;
 }
 
-.logContainer {
+.container {
   overflow: auto;
   position: absolute;
   
@@ -61,20 +64,37 @@ body {
   right: 0;
   top: 20px;
   /*background: rgba(180, 180, 180, .15);*/
-  background: var(--nord3);
+  background: white;
 }
 
-.title {
-  height: 18px;
-  margin-left: 5px;
-  margin-top: 1px;
+.bigStatusContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 40px;
 }
 
 .statusBox {
   overflow: visible;
 }
 
-.progress {
+.progressPercent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 32px;
+}
+
+.barContainer {
+  position: relative;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/*.progress {
   margin: 4px 3px 0px 3px;
 }
 
@@ -86,7 +106,7 @@ body {
 
 .statusContainer {
   margin-left: 4px;
-}
+}*/
 
 p {
   line-height: 14px;

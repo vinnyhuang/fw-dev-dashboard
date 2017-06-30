@@ -23,10 +23,10 @@ export default class Log extends Component {
         <div className="title">
           <strong>{ this.props.name }</strong>
         </div>
-        <div className="logContainer">
+        <div className="container">
           { this.props.data.replace(/ /g, "\u00a0").split('\n').map((line, index) => (
-            line === "" ? <p key={ index }><br /></p> : <p key={ index }>{ Parser(ansiHTML(line)) }</p>)
-          ) }
+            line === "" ? <p key={ index }><br /></p> : <p key={ index } dangerouslySetInnerHTML={{ __html: ansiHTML(line) }} />
+          )) }
         </div>
         <div className="handle">
           <div className="handleIcon"/>
