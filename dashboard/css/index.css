@@ -1,26 +1,54 @@
 
-.logBox {
+.box {
   overflow: hidden;
-  border-style: groove;
+  /*border-style: groove;*/
+  /*border-style: none;*/
+  border: 2px none lightgray;
   position: relative;
+}
+
+.box:hover {
+  border-style: dashed;
+}
+
+.box:hover .handle,
+.box:hover .react-resizable-handle {
+  display: block;
+}
+
+.react-resizable-handle {
+  display: none;
 }
 
 .logContainer {
   overflow: auto;
   position: absolute;
-  height: 100%;
+  
+  height: -moz-calc(100% - 20px);
+  height: -webkit-calc(100% - 20px);
+  height: -o-calc(100% - 20px);
+  height: calc(100% - 20px);
+
   width: 100%;
   right: 0;
-  top: 0;
+  top: 20px;
+  background: rgba(180, 180, 180, .15);
+}
+
+.title {
+  height: 18px;
+  margin-left: 3px;
+  margin-top: 1px;
 }
 
 .statusBox {
-  overflow: auto;
-  border-style: groove;
+  overflow: visible;
 }
 
-.progressDiv {
-  padding: 5px;
+.progressLabel {
+  position: absolute;
+  top: 0px;
+  left: 4px;
 }
 
 p {
@@ -39,37 +67,14 @@ p {
   top: 0;
   right: 0;
   border: none;
+  display: none;
 }
 
 .handleIcon {
   background-image: url(../images/cursor-move-black.png);
-  /*background: url('../images/cursor-move-black.png') cover no-repeat;*/
   background-size: cover;
   background-repeat: no-repeat;
   height: 18px;
   width: 18px;
   border: none;
 }
-
-/*.handleIcon {
-  height: 18px;
-  width: 18px;
-  filter: none; 
-  -webkit-filter: blur(0px); 
-  -moz-filter: blur(0px); 
-  -ms-filter: blur(0px);
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
-}*/
-
-/*.handleIcon {
-  -webkit-transform: scale(0.10);
-  -moz-transform: scale(0.10);
-  -ms-transform: scale(0.10);
-  -o-transform: scale(0.10);
-  transform: scale(0.10);
-  filter: none; 
-  -webkit-filter: blur(0px); 
-  -moz-filter: blur(0px); 
-  -ms-filter: blur(0px);
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
-}*/
