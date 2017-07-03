@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import SocketIOClient from 'socket.io-client';
-import ansiHTML from 'ansi-html';
 import dragIcon from '../images/cursor-move-black.png';
 import Log from './log.js';
 import Status from './status.js';
